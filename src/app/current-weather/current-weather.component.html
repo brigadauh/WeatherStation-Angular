@@ -1,0 +1,40 @@
+<div *ngIf="currentWeatherData">
+    <div >
+      <span id="current_temp_2" class="temp-2">&nbsp;{{(units ==='C' ? currentWeatherData.temp*1.8+32 : currentWeatherData.temp*1.0).toFixed(0)}}<span class="temp-degrees-2">&deg;</span><span id="current_temp_unit_2" class="temp-unit-2">{{units ==='C' ? 'F' : 'C'}}</span></span>
+    </div>
+    <div >
+      <span id="current_temp" class="temp" (click)="switchUnits()">&nbsp;{{tempTrendSymbol+(units ==='C' ? currentWeatherData.temp*1.0 : currentWeatherData.temp*1.8+32).toFixed(0)}}<span class="temp-degrees-2">&deg;</span><span id="current_temp_unit" class="temp-unit-2">{{units ==='C' ? 'C' : 'F'}}</span></span>
+    </div>
+    <div>
+        <span id="temp_humid_last_reported">{{currentWeatherData.recorded_time}}</span>
+        <span id="temp_humid_source">{{'('+ (currentWeatherData.source || 'local') +')'}}</span>
+    </div>
+    <div class="misc-data humidity">
+        <span>Humidity:</span><span id="current_humidity">{{(currentWeatherData.humidity*1.0).toFixed(0)}}</span>% <!--convert string to number doesn't work here-->
+    </div>
+    <div class="misc-data recorded-time">
+        <span>Time:</span><span id="current_recorded_time">{{currentWeatherData.recorded_time}}</span> <!--convert string to number doesn't work here-->
+    </div>
+    <div>
+        <span id="forecast_temp" class="temp"
+        (click)="switchUnits()">{{(units ==='C' ? tempC_forecast*1.0 : tempC_forecast*1.8+32).toFixed(0)}}&deg;<span id="forecast_temp_unit" class="temp-unit-2">{{units ==='C' ? 'C' : 'F'}}</span></span>
+    </div>
+    <div>
+        <span id="forecast_temp_2" class="temp-2">&nbsp;{{(units ==='C' ? tempC_forecast*1.8+32 : tempC_forecast*1.0).toFixed(0)}}<span class="temp-degrees-2">&deg;</span><span id="forecast_temp_unit_2" class="temp-unit-2">{{units ==='C' ? 'F' : 'C'}}</span></span>
+    </div>
+    <div className="misc-data datetime">
+        <span id="temp_forecast_time">{{tempC_forecast_Time}}</span>
+    </div>
+
+    <div *ngIf = "forecastArray" class = "hourly-forecast">
+        <span *ngFor = 'let forecast of forecastArray' class = "hourly-forecast-box">
+            <app-hourly-temp [forecast] = forecast></app-hourly-temp>
+
+        </span>
+    </div>
+</div>
+
+<!--ToDo: find out what it is
+<ng - template #currentData>
+no data
+</ng - template> -->

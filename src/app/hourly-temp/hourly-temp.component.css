@@ -1,0 +1,27 @@
+
+.HourlyTemp-top-left {
+    width:49%;
+    font-size: 12px;
+    font-weight: bolder;
+    color: darkred;
+    float: left;
+    text-align: left;
+}
+.HourlyTemp-top-right {
+    width:49%;
+    font-size: 12px;
+    font-weight: bolder;
+    color: darkcyan;
+    float: right;
+    text-align: right;
+}
+.HourlyTemp-bottom {
+    width:100%;
+    font-size: 12px;
+    font-weight: bolder;
+    color: black;
+    float: none;
+    text-align: center;
+    margin-top: 15px;
+    display: inline-block;
+}
