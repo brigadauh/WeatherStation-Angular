@@ -34,3 +34,23 @@ export function currentDate()
 
     return yyyy+'-'+mm + '-' + dd;
 }
+/****************************** cookie **************************/
+export function setCookie(cname, cvalue, exdays,path) {
+    let d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path="+path;
+}
+
+export function getCookie(name) {
+  let value = "; " + document.cookie;
+  let parts = value.split("; " + name + "=");
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return "";
+}
+
+export function deleteCookies() {
+    document.cookie = "eptic_cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie = "MKHSession=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    //document.cookie = "L=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+}

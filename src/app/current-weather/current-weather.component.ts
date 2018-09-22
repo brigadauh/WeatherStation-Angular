@@ -8,7 +8,7 @@ import * as utils from '../utils';
   styleUrls: ['./current-weather.component.css']
 })
 export class CurrentWeatherComponent implements OnInit {
-    DEBUG = true;
+    DEBUG: boolean = false;
     currentWeatherData = null;
     downArrow = '\u2193';
     upArrow = '\u2191';
@@ -21,12 +21,12 @@ export class CurrentWeatherComponent implements OnInit {
     maxTempTime=utils.currentDate();
     tempC_forecast="";
     tempC_forecast_Time="";
-    units = 'C';
-     constructor() {
-      this.getCurrentData();
-      setInterval(() => {this.getCurrentData()},this.repeatIntervalCurrent);
-      this.getForecastData();
-      setInterval(() => {this.getForecastData()},this.repeatIntervalForecast);
+    units = utils.getCookie('temperature-units') || 'C';
+    constructor() {
+        this.getCurrentData();
+        setInterval(() => {this.getCurrentData()},this.repeatIntervalCurrent);
+        this.getForecastData();
+        setInterval(() => {this.getForecastData()},this.repeatIntervalForecast);
     }
     getCurrentData(): void {
       //let self = this;
@@ -85,7 +85,7 @@ export class CurrentWeatherComponent implements OnInit {
                 maxTempPrev = maxTemp;
                 minTempPrev = minTemp;
                 //forecastDateTimePrev = forecastDateTime.substring(0,16);
-                forecastArray.push({"maxTemp":this.upArrow+maxTemp.toFixed(0),"minTemp":this.downArrow+minTemp.toFixed(0), "time":forecastDateTime.substring(11,16)});
+                forecastArray.push({"maxTemp":maxTemp, "minTemp":minTemp, "time":forecastDateTime.substring(11,16)});
                 //console.log('forecast',forecastDateTime,maxTemp,minTemp );
                 //}
             }
@@ -108,6 +108,7 @@ export class CurrentWeatherComponent implements OnInit {
     }
     switchUnits() {
         if (this.units ==='C') { this.units ='F'} else {this.units = 'C'}
+        utils.setCookie('temperature-units', this.units, 3650,'/');
     }
 
     ngOnInit() {

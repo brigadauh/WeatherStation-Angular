@@ -28,7 +28,7 @@
 
     <div *ngIf = "forecastArray" class = "hourly-forecast">
         <span *ngFor = 'let forecast of forecastArray' class = "hourly-forecast-box">
-            <app-hourly-temp [forecast] = forecast></app-hourly-temp>
+            <app-hourly-temp [forecast] = 'forecast' [units] = 'units'></app-hourly-temp>
 
         </span>
     </div>
