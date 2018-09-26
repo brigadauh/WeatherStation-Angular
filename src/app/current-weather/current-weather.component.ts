@@ -66,18 +66,21 @@ export class CurrentWeatherComponent implements OnInit {
         let minTempPrev=100;
         let minStop=false;
         let maxStop=false;
-        let forecastArray = [];
+        let forecastArrayOut = [];
+        //console.log('forecasts',forecasts);
         for (let i = 0; i < forecasts.length; i++) {
             if (i > 0) { // ignore 1st element because it is in the past, considering 3hr difference
                 let forecastDateTime = forecasts[i]["forecast_date"];
-                //console.log('forecastDateTime1',forecastDateTime);
                 let forecastDateTimeD =new Date(forecastDateTime);
                 forecastDateTimeD.setHours(forecastDateTimeD.getHours()-3);
                 forecastDateTime = utils.formatDate(forecastDateTimeD);
                 //console.log('forecastDateTime2',forecastDateTime);
-                let forecast=forecasts[i]["forecasts"];
+                const forecast=forecasts[i]["forecasts"];
                 let maxTemp=(Number(forecast.main.temp_max)-273) || -273;
                 let minTemp=(Number(forecast.main.temp_min)-273) || +100;
+                const hourlyWeather = forecast.weather[0];
+                let conditionDescription = hourlyWeather.description;
+                let icon = hourlyWeather.icon;
                 if (maxTemp < maxTempPrev) {maxStop=true;} // stop when max temperature started to decline
                 if (minTemp > minTempPrev) {minStop=true;} // stop when min temperature started to rise
                 if (maxTemp > maxTempForecast && !maxStop ) {maxTempForecast=maxTemp; this.maxTempTime=forecastDateTime.substring(0,16);}
@@ -85,7 +88,7 @@ export class CurrentWeatherComponent implements OnInit {
                 maxTempPrev = maxTemp;
                 minTempPrev = minTemp;
                 //forecastDateTimePrev = forecastDateTime.substring(0,16);
-                forecastArray.push({"maxTemp":maxTemp, "minTemp":minTemp, "time":forecastDateTime.substring(11,16)});
+                forecastArrayOut.push({"maxTemp":maxTemp, "minTemp":minTemp, "time":forecastDateTime.substring(11,16), "condition": conditionDescription, "icon": icon});
                 //console.log('forecast',forecastDateTime,maxTemp,minTemp );
                 //}
             }
@@ -104,7 +107,7 @@ export class CurrentWeatherComponent implements OnInit {
         this.tempC_forecast = (this.tempTrend === -1) ? minTempForecastS : maxTempForecastS;
         this.tempC_forecast_Time = (this.tempTrend === -1) ? this.minTempTime : this.maxTempTime;
 
-        return forecastArray;
+        return forecastArrayOut;
     }
     switchUnits() {
         if (this.units ==='C') { this.units ='F'} else {this.units = 'C'}

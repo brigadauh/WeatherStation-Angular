@@ -12,6 +12,8 @@ export class HourlyTempComponent implements OnInit {
     DEBUG: boolean = false;
     maxTemp: string = '';
     minTemp: string = '';
+    condition: string = '';
+    icon: string = '';
     downArrow: string = '\u2193';
     upArrow: string = '\u2191';
     time: string = '';
@@ -23,6 +25,8 @@ export class HourlyTempComponent implements OnInit {
         this.maxTemp = this.upArrow + ((this.units === 'F') ? (this.forecast.maxTemp * 1.8) + 32 : this.forecast.maxTemp).toFixed(0) ;
         this.minTemp = this.downArrow + ((this.units === 'F') ? (this.forecast.minTemp * 1.8) + 32 : this.forecast.minTemp).toFixed(0);
         this.time = this.forecast.time;
+        this.condition = this.forecast.condition;
+        this.icon = this.forecast.icon;
     }
 
 }
