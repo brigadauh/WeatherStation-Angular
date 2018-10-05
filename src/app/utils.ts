@@ -34,6 +34,14 @@ export function currentDate()
 
     return yyyy+'-'+mm + '-' + dd;
 }
+export function currentTime(isSeconds) {
+    var d=new Date();
+    var cTime=d.toLocaleTimeString();
+    if (!isSeconds) {
+        cTime=cTime.replace(/:\d+ /, ' ');
+    }
+    return cTime;
+}
 /****************************** cookie **************************/
 export function setCookie(cname, cvalue, exdays,path) {
     let d = new Date();

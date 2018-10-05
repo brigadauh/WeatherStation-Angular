@@ -25,3 +25,9 @@
     margin-top: 15px;
     display: inline-block;
 }
+.HourlyTemp-description {
+    color: #ff6c00;
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 13px;
+}
