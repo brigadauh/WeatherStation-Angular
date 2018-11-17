@@ -6,11 +6,11 @@ h1 {
     margin: 0 auto;
 }
 .temp {
-    font-size: 4em;
+    font-size: 120px;
     cursor:pointer;
 }
 .temp-2 {
-    font-size: 1em;
+    font-size: 30px;
     font-weight: 600;
     color: #b92e2e;
 }
@@ -27,6 +27,13 @@ h1 {
 .temp-degrees-2 {
     font-size: 0.5em;
     vertical-align: top;
+}
+.temp-reported-time{
+    font-weight:600;
+    color:#5f8aaf;
+    font-style: italic;
+    text-align:center;
+    font-size:20px;
 }
 .misc-data {
         text-align: center;

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import * as api from '../api';
 import * as utils from '../utils';
-
+import { WeatherService }  from '../api';
 @Component({
   selector: 'app-current-weather',
   templateUrl: './current-weather.component.html',
   styleUrls: ['./current-weather.component.css']
 })
 export class CurrentWeatherComponent implements OnInit {
-    DEBUG: boolean = false;
+    DEBUG: boolean = true;
     currentWeatherData = null;
     downArrow = '\u2193';
     upArrow = '\u2191';
@@ -19,14 +19,18 @@ export class CurrentWeatherComponent implements OnInit {
     repeatIntervalForecast = 300000;
     minTempTime=utils.currentDate();
     maxTempTime=utils.currentDate();
-    tempC_forecast="";
+    tempC_forecast="-273";
     tempC_forecast_Time="";
-    units = utils.getCookie('temperature-units') || 'C';
-    constructor() {
-        this.getCurrentData();
-        setInterval(() => {this.getCurrentData()},this.repeatIntervalCurrent);
-        this.getForecastData();
-        setInterval(() => {this.getForecastData()},this.repeatIntervalForecast);
+    units:string = utils.getCookie('temperature-units') || 'C';
+    strTempF_current:string = '';
+    strTempC_current:string = '';
+    strTempF_forecast:string = '';
+    strTempC_forecast:string = '';
+    constructor(private weatherService: WeatherService) {
+        this.getCurrentDataObservable();
+        setInterval(() => {this.getCurrentDataObservable()},this.repeatIntervalCurrent);
+        this.getForecastObservable();
+        setInterval(() => {this.getForecastObservable()},this.repeatIntervalForecast);
     }
     getCurrentData(): void {
       //let self = this;
@@ -46,16 +50,55 @@ export class CurrentWeatherComponent implements OnInit {
               this.tempTrendSymbol = '';
           }
           this.DEBUG && console.log('getTempCurrent',this.currentWeatherData,this.currentWeatherData.temp);
+          this.strTempF_current = (this.units ==='C' ? this.currentWeatherData.temp*1.8+32 : this.currentWeatherData.temp*1.0).toFixed(0);
+          this.strTempC_current = (this.units ==='C' ? this.currentWeatherData.temp*1.0 : this.currentWeatherData.temp*1.8+32).toFixed(0);
+
       })
     }
+
+    getCurrentDataObservable(): void {
+        this.weatherService.getDataCurrent()
+        .subscribe((currentWeather) => {
+            this.currentWeatherData = currentWeather.data[0];
+            //console.log('this.currentWeatherData',this.currentWeatherData)
+            if (Number(this.currentWeatherData.temp) > Number(this.currentWeatherData.recent_temp)) {
+                this.tempTrend = 1;
+                this.tempTrendSymbol = this.upArrow;
+            }
+            else if (Number(this.currentWeatherData.temp) < Number(this.currentWeatherData.recent_temp)) {
+                this.tempTrend = -1;
+                this.tempTrendSymbol = this.downArrow;
+            }
+            else {
+                this.tempTrend = 0;
+                this.tempTrendSymbol = '';
+            }
+            this.DEBUG && console.log('getTempCurrent',this.currentWeatherData,this.currentWeatherData.temp);
+            this.strTempF_current = (this.units ==='C' ? this.currentWeatherData.temp*1.8+32 : this.currentWeatherData.temp*1.0).toFixed(0);
+            this.strTempC_current = (this.units ==='C' ? this.currentWeatherData.temp*1.0 : this.currentWeatherData.temp*1.8+32).toFixed(0);
+
+        });
+    }
+
     getForecastData(): void {
       api.getDataForecast()
       .then((forecastData) => {
           this.forecastArray = this.hourlyData(forecastData);
           this.DEBUG && console.log('forecastArray:', this.forecastArray);
+          this.strTempF_forecast = (this.units ==='C' ? Number(this.tempC_forecast)*1.8+32 : Number(this.tempC_forecast)*1.0).toFixed(0);
+          this.strTempC_forecast = (this.units ==='C' ? Number(this.tempC_forecast)*1.0 : Number(this.tempC_forecast)*1.8+32).toFixed(0);
       })
     }
-
+    getForecastObservable(): void {
+        this.weatherService.getDataForecast()
+        .subscribe((forecastWeather) => {
+            console.log('forecastWeather',forecastWeather);
+            this.forecastArray = this.hourlyData(forecastWeather.data);
+            this.DEBUG && console.log('forecastArray:', this.forecastArray);
+            this.strTempF_forecast = (this.units ==='C' ? Number(this.tempC_forecast)*1.8+32 : Number(this.tempC_forecast)*1.0).toFixed(0);
+            this.strTempC_forecast = (this.units ==='C' ? Number(this.tempC_forecast)*1.0 : Number(this.tempC_forecast)*1.8+32).toFixed(0);
+        })
+    }
     hourlyData(forecasts) {
         let maxTempForecast=-273;
         let minTempForecast=100;

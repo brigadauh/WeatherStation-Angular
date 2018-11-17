@@ -5,8 +5,8 @@
     <div >
       <span id="current_temp" class="temp" (click)="switchUnits()">&nbsp;{{tempTrendSymbol+(units ==='C' ? currentWeatherData.temp*1.0 : currentWeatherData.temp*1.8+32).toFixed(0)}}<span class="temp-degrees-2">&deg;</span><span id="current_temp_unit" class="temp-unit-2">{{units ==='C' ? 'C' : 'F'}}</span></span>
     </div>
-    <div>
-        <span id="temp_humid_last_reported">{{currentWeatherData.recorded_time}}</span>
+    <div class = "temp-reported-time">
+        <span id="temp_humid_last_reported" >Current:{{currentWeatherData.recorded_time}}</span>
         <span id="temp_humid_source">{{'('+ (currentWeatherData.source || 'local') +')'}}</span>
     </div>
     <div>
@@ -17,10 +17,7 @@
         <span id="forecast_temp_2" class="temp-2">&nbsp;{{(units ==='C' ? tempC_forecast*1.8+32 : tempC_forecast*1.0).toFixed(0)}}<span class="temp-degrees-2">&deg;</span><span id="forecast_temp_unit_2" class="temp-unit-2">{{units ==='C' ? 'F' : 'C'}}</span></span>
     </div>
     <div className="misc-data datetime">
-        <span id="temp_forecast_time">{{tempC_forecast_Time}}</span>
-    </div>
-    <div class="misc-data humidity">
-        <span>Humidity:</span><span id="current_humidity">{{(currentWeatherData.humidity*1.0).toFixed(0)}}</span>% <!--convert string to number doesn't work here-->
+        <span id="temp_forecast_time" class= "temp-reported-time">Forecast:{{tempC_forecast_Time}}</span>
     </div>
 
     <div *ngIf = "forecastArray" class = "hourly-forecast">
@@ -28,6 +25,9 @@
             <app-hourly-temp [forecast] = 'forecast' [units] = 'units'></app-hourly-temp>
 
         </span>
+    </div>
+    <div class="misc-data humidity">
+        <span>Humidity:</span><span id="current_humidity">{{(currentWeatherData.humidity*1.0).toFixed(0)}}</span>% <!--convert string to number doesn't work here-->
     </div>
     <div>
         <app-current-time></app-current-time>
