@@ -45,6 +45,15 @@ h1 {
   padding: 10px 0 30 0;
   text-align:center;
 }
+.side-menu-wrap {
+  position:absolute;
+  left:0;
+  top:0;
+  width:90%;
+  max-width:320px;
+  height:100%;
+  background-color: #cccccc;
+}
 /**  Footer **/
 
 footer {

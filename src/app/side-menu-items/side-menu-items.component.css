@@ -1,0 +1,16 @@
+.side-menu {
+  text-align:left;
+  width:100%;
+  list-style: none;
+}
+.side-menu-submenu {
+  cursor:pointer;
+  color: #5a5a5a;
+}
+.side-menu-item {
+  text-decoration: none;
+  color: #5a5a5a;
+}
+.side-menu-item:visited {
+  color: #5a5a5a;
+}

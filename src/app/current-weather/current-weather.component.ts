@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as api from '../api';
+import * as api from '../services/api';
 import * as utils from '../utils';
-import { WeatherService }  from '../api';
+import { WeatherService }  from '../services/api';
 @Component({
   selector: 'app-current-weather',
   templateUrl: './current-weather.component.html',

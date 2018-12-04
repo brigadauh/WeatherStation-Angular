@@ -1,0 +1,22 @@
+.sandwich-button {
+  padding:2px 5px;
+  display:inline-block;
+  position:absolute;
+  left:10px;
+  top:10px;
+  cursor:pointer;
+}
+.sandwich-bttn-panel {
+  width: 25px;
+  height: 3px;
+  background-color: #6b6b6b;
+  margin: 5px 0;
+}
+.side-menu-wrap {
+  position: absolute;
+  width: 320px;
+  height: calc(100% - 50px);
+  background-color: gainsboro;
+  overflow-x:auto;
+  overflow-y:auto;
+}
