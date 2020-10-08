@@ -1,4 +1,15 @@
-
+.HourlyTemp-box {
+    width: 45px;
+    height: 47px;
+    padding: 1px 3px 3px 3px;
+    display: inline-block;
+    background-color: #b9cee0;
+    border: 1px #ececec solid;
+    border-radius: 5px;
+    margin: 0 5px;
+    vertical-align: top;
+    white-space: initial;
+}
 .HourlyTemp-top-left {
     width:49%;
     font-size: 12px;
@@ -22,12 +33,13 @@
     color: black;
     float: none;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
     display: inline-block;
 }
 .HourlyTemp-description {
-    color: #ff6c00;
-    margin-top: 5px;
-    display: inline-block;
-    font-size: 13px;
+  color: #ff6c00;
+      margin-top: 0px;
+      display: inline-block;
+      font-size: 13px;
+      line-height: 13px;
 }

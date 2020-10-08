@@ -14,4 +14,7 @@ export class SideMenuComponent implements OnInit {
     this.hidden = !this.hidden;
     console.log('hidden', this.hidden);
   }
+  closeMenuHandler(event?: any) {
+    this.hidden = true;
+  }
 }

@@ -21,7 +21,8 @@ export class CurrentWeatherComponent implements OnInit {
     maxTempTime=utils.currentDate();
     tempC_forecast="-273";
     tempC_forecast_Time="";
-    units:string = utils.getCookie('temperature-units') || 'C';
+    // units:string = utils.getCookie('temperature-units') || 'C';
+    units:string = localStorage.getItem('tempUnit') || 'C';
     strTempF_current:string = '';
     strTempC_current:string = '';
     strTempF_forecast:string = '';
@@ -47,7 +48,7 @@ export class CurrentWeatherComponent implements OnInit {
           }
           else {
               this.tempTrend = 0;
-              this.tempTrendSymbol = '';
+              this.tempTrendSymbol = ' ';
           }
           this.DEBUG && console.log('getTempCurrent',this.currentWeatherData,this.currentWeatherData.temp);
           this.strTempF_current = (this.units ==='C' ? this.currentWeatherData.temp*1.8+32 : this.currentWeatherData.temp*1.0).toFixed(0);
@@ -71,7 +72,7 @@ export class CurrentWeatherComponent implements OnInit {
             }
             else {
                 this.tempTrend = 0;
-                this.tempTrendSymbol = '';
+                this.tempTrendSymbol = ' ';
             }
             this.DEBUG && console.log('getTempCurrent',this.currentWeatherData,this.currentWeatherData.temp);
             this.strTempF_current = (this.units ==='C' ? this.currentWeatherData.temp*1.8+32 : this.currentWeatherData.temp*1.0).toFixed(0);
@@ -154,7 +155,8 @@ export class CurrentWeatherComponent implements OnInit {
     }
     switchUnits() {
         if (this.units ==='C') { this.units ='F'} else {this.units = 'C'}
-        utils.setCookie('temperature-units', this.units, 3650,'/');
+        //utils.setCookie('temperature-units', this.units, 3650,'/');
+        localStorage.setItem('tempUnit', this.units);
     }
 
     ngOnInit() {

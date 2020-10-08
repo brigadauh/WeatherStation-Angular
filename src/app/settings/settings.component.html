@@ -1,0 +1,61 @@
+<div class="settings-units-wrap">
+  <h3>Settings</h3>
+  <form (ngSubmit)="onSubmit()" #f="ngForm">
+      <div
+        id="user-data"
+        ngModelGroup="userData"
+        #userData="ngModelGroup">
+        <span class="settings-lbl">Temperature Units:</span>
+        <span class="settings-temp">
+          <button
+            class="btn btn-default left" [ngClass]="{'selected': temp_unit === 'F'}"
+            type="button"
+            (click)="unitChosen('F')">&deg;F</button>
+          <button
+            class="btn btn-default right" [ngClass]="{'selected': temp_unit === 'C'}"
+            type="button"
+            (click)="unitChosen('C')">&deg;C</button>
+        </span>
+        <div class="form-group">
+          <label for="location" class="settings-lbl">Location:</label>
+          <input
+            type="text"
+            id="settings-location"
+            class="form-control settings-address"
+            [(ngModel)]="location"
+            name="location"
+            placeholder="city, state or zip"
+            required>
+          <div class="help-block" *ngIf="!location.valid && location.touched">Please enter a location!</div>
+        </div>
+        <div class="clear"></div>
+        <span class="settings-lbl">Screen Mode:</span>
+        <span class="settings-screen">
+          <button
+            class="btn btn-default left" [ngClass]="{'selected': screenMode === 'dark'}"
+            type="button"
+            (click)="modeChosen('dark')">Dark</button>
+          <button
+            class="btn btn-default right" [ngClass]="{'selected': screenMode === 'light'}"
+            type="button"
+            (click)="modeChosen('light')">Light</button>
+        </span>
+        <div class="form-group">
+          <label for="email" class="settings-lbl">Send me alerts</label>
+          <input
+            type="email"
+            id="settings-email"
+            class="form-control settings-email"
+            placeholder="enter your email"
+            [(ngModel)]="email"
+            name="email">
+          <div class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+
+
+
+
+  </form>
+</div>

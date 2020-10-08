@@ -19,4 +19,5 @@
   background-color: gainsboro;
   overflow-x:auto;
   overflow-y:auto;
+  z-index: 1000;
 }

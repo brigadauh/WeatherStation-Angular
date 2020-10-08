@@ -1,4 +1,6 @@
-<span class="HourlyTemp-top-left">{{this.maxTemp}}</span>
-<span class="HourlyTemp-top-right">{{this.minTemp}}</span>
-<span class="HourlyTemp-bottom">{{this.time}}</span>
-<span class="HourlyTemp-description">{{this.condition}}</span>
+<span class = "HourlyTemp-box" style = "background-image: {{'url(assets/img/' + this.forecast.icon + '.png)'}}">
+  <span class="HourlyTemp-top-left">{{this.maxTemp}}</span>
+  <span class="HourlyTemp-top-right">{{this.minTemp}}</span>
+  <span class="HourlyTemp-bottom">{{this.time}}</span>
+  <span class="HourlyTemp-description">{{this.condition}}</span>
+</span>

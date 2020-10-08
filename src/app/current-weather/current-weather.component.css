@@ -10,9 +10,14 @@ h1 {
     cursor:pointer;
 }
 .temp-2 {
+    left: 280px;
     font-size: 30px;
     font-weight: 600;
     color: #b92e2e;
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    margin-top: 20px;
 }
 .temp-unit {
     font-size: 0.4em;
@@ -25,8 +30,9 @@ h1 {
     vertical-align: top;
 }
 .temp-degrees-2 {
-    font-size: 0.5em;
-    vertical-align: top;
+    font-size: 0.3em;
+    margin-top: 0.3em;
+    position: absolute;
 }
 .temp-reported-time{
     font-weight:600;
@@ -60,16 +66,4 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     white-space:nowrap;
-}
-.hourly-forecast-box {
-    width:45px;
-    height:45px;
-    padding:3px;
-    display:inline-block;
-    background-color: #b9cee0;
-    border: 1px #ececec solid;
-    border-radius:5px;
-    margin:3px;
-    vertical-align: top;
-    white-space: normal;
 }

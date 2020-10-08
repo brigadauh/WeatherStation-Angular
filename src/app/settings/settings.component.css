@@ -1,0 +1,26 @@
+.btn.left {
+  margin-right:5px;
+}
+.btn.right {
+  margin-left:5px;
+}
+.settings-lbl {
+  width: 200px!important;
+  display: inline-block;
+  text-align: left;
+}
+.settings-temp {
+  width: 208px;
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.settings-temp .selected {
+  background-color: #9dcdff;
+}
+.settings-address, .settings-email {
+  width: 200px;
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 10px;
+}

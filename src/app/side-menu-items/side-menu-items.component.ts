@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Menu } from '../shared/menu';
-import { SideMenuService } from '../services/side-menu.service';
+import { SideMenuService } from '../side-menu/side-menu.service';
 
 @Component({
   selector: 'app-side-menu-items',
@@ -11,6 +11,7 @@ export class SideMenuItemsComponent implements OnInit {
 
   @Input() sideMenu: Menu[];
   @Input() hidden: boolean = true;
+  @Output() closeMenu = new EventEmitter<any>();
   constructor(private sideMenuService: SideMenuService) { }
 
   ngOnInit() {
@@ -23,7 +24,10 @@ export class SideMenuItemsComponent implements OnInit {
     console.log('event', event);
     if (menu.submenu.length > 0) {
       this.hidden = !this.hidden;
+    } else {
+      this.closeMenu.emit();
     }
+
   }
 
 }
